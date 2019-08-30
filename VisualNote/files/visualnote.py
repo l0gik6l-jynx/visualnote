@@ -8,7 +8,9 @@ from math import *
 from config import *
 
 
-pygame.mixer.init(8000, -16, 2, 64)
+
+
+
 
 win = GraphWin("My Circle", 500, 500)
 ''' c = Circle(Point(250,250),150) '''
@@ -65,11 +67,16 @@ twentytwoCircle = Circle(Point(85,85),50)#
 twentythreeCircle = Circle(Point(190,25),50)#
 
 button1 = Rectangle(Point(500,500),Point(450,480))
+button2 = Rectangle(Point(0,500),Point(50,480))
 text1 = Text(Point(475,490),"Play")
+text2 = Text(Point(25,490),"Close")
 
 button1.draw(win)
+button2.draw(win)
 text1.draw(win)
+text2.draw(win)
 reset.draw(win)
+
 twelveCircle.draw(win)
 thirteenCircle.draw(win)
 fourteenCircle.draw(win)
@@ -119,23 +126,19 @@ text20 = Text(twenty,"Ab")
 text21 = Text(twentyone,"A")
 text22 = Text(twentytwo,"Bb")
 text23 = Text(twentythree,"B")
-
-
-
-
-
-
 for text in [text0,text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20,text21,text22,text23]:
     text.draw(win)
 
 win.setBackground("black")
 reset.setFill("gray")
 button1.setFill("gray")
+button2.setFill("gray")
 
 true = 1
 playlist = []
 play = []
 
+#translators
 def num2color(number):
     color = ''
     if number == 0 or number == 12 :
@@ -226,11 +229,10 @@ def word2num(word):
         if word == i:
             return output
 
-
+#music functions
 def clearCircles():
     for x in [zeroCircle,oneCircle,twoCircle,threeCircle,fourCircle,fiveCircle,sixCircle,sevenCircle,eightCircle,nineCircle,tenCircle,elevenCircle,twelveCircle,thirteenCircle,fourteenCircle,fifteenCircle,sixteenCircle,seventeenCircle,eighteenCircle,nineteenCircle,twentyCircle,twentyoneCircle,twentytwoCircle,twentythreeCircle ]:
         x.setFill("gray")
-
 def play(note,length):
     print(note)
     if isinstance(note,int) :
@@ -250,7 +252,6 @@ def hit(note):
         for i in note:
             markNote(i)
             pygame.mixer.Sound( '{}.wav'.format(i)).play()
-
 def stop():
     true
     pygame.mixer.stop()
@@ -350,9 +351,6 @@ class scale():
             if choice == 4:
                 play4()
 
-
-
-
 C_major = scale("C Major",[0,2,4,5,7,9,10,12,14,16,17,19,22])
 Cs_major = scale("C sharp Major",[1,3,5,6,8,10,11,13,15,17,18,20,22,23])
 D_major = scale("D Major",[2,4,6,7,9,11,12,14,16,18,19,21,23,0])
@@ -367,6 +365,9 @@ C_locrian = scale("C Locrian",[0,1,3,5,6,8,10,12,13,15,17,18,20,22])
 C_minor = scale("C Minor",[0,2,3,5,7,8,10,12,14,15,17,19,20,22])
 C_dorian = scale("C Dorian",[0,2,3,5,7,9,10,12,14,15,17,19,21,22])
 C_mixolydian = scale("C Mixolydian",[0,2,4,5,7,9,10,12,14,16,17,19,21,22])
+
+
+
 
 def playall():
     print("playing all scales")
@@ -403,12 +404,14 @@ def PlayChords():
             play(playlist,1)
             clearCircles()
             playlist = []
+        if  0 < click.getX()  < 50 and 480 < click.getY() < 500:
+            exit()
         if  450 < click.getX()  < 500 and 480 < click.getY() < 500:#terminal button
             playall()
 
 
 
 for i in range(24):
-    play(i,64)
+    play(i,96)
     time.sleep(.015)
 PlayChords()

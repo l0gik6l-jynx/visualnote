@@ -1,0 +1,13 @@
+This code needs:
+	graphics.py
+	pygame +pip
+
+To install from scratch:
+	install PYTHON from 
+		https://www.python.org/downloads/
+
+	add environment variable in "path" for PYTHON (follow instructions here)
+		https://geek-university.com/python/add-python-to-the-windows-path/
+	
+	then, press windowsKey+r and type in: "cmd"
+	then enter: "python -m pip install pygame" into the commandline you just opened
